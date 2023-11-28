@@ -8,8 +8,7 @@ export const fetchJoke = () =>
         withCredentials: false,
         headers: {
           accept: 'application/json',
-          'X-RapidAPI-Key':
-            '1e30d40eecmsh2f2865eed9ce282p1eeb5ejsncbdf450fe0c1',
+          'X-RapidAPI-Key': 'xxxxxxxxxxxxxxxxxxx',
           'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com',
         },
       }
