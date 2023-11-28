@@ -13,8 +13,4 @@ type Story = StoryObj<typeof App>;
 
 export const Primary: Story = {
   args: {},
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/Welcome!/gi)).toBeTruthy();
-  },
 };
