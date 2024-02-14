@@ -15,23 +15,31 @@ export function CommentAnywhere({
 }: CommentAnywhereProps) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+
+  const clickListener = (event: MouseEvent) => {
+    const x = event.clientX;
+    const y = event.clientY - 48;
+    handleMove({ x, y });
+  };
 
   useEffect(() => {
-    document.body.addEventListener('click', (event) => {
-      const x = event.clientX;
-      const y = event.clientY - 48;
+    if (!dropdownOpen) {
+      document.body.addEventListener('click', clickListener);
+      return () => document.body.removeEventListener('click', clickListener);
+    }
+  }, [dropdownOpen]);
 
-      if (!ref.current?.matches('[data-state="open"]')) {
-        setPosition({ x, y });
-        setDropdownOpen(true);
-      }
-    });
-  }, []);
+  const handleMove = ({ x, y }: { x: number; y: number }) => {
+    if (!dropdownOpen) {
+      setPosition({ x, y });
+      setDropdownOpen(true);
+    }
+  };
 
   return (
     <CommentDropdown
       open={dropdownOpen}
+      onOpenChange={setDropdownOpen}
       className="fixed"
       userAvatar={userAvatar}
       userName={userName}
